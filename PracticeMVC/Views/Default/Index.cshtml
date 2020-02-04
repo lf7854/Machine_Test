@@ -1,0 +1,482 @@
+﻿
+@{
+    ViewBag.Title = "Category Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container pb-4 customContainerMax">
+    <div class="row">
+        <div class="col-12 p-4 textCenter">
+            <h5 class="display-3 largeFont_2x">
+                Welcome, <span class="customRed">
+                    <b>
+                        <span id="ContentPlaceHolder1_lblLoginName">Manish Flora</span>
+                    </b>
+                </span>!
+            </h5>
+        </div>
+        <div class="col-12 pb-2">
+            <ul class="p-0 m-0 liNone centerAlign mb-2">
+                <li class="largeFont_1x liInline active pb-1 mr-3">
+                    <a class="blackIcon pl-3 pr-3 tabButtons customRed setBold" href="javascript:void(0);" onclick="switchTabs('categoryMaster', this);">
+                        Category Master
+                    </a>
+                </li>
+                <li class="largeFont_1x liInline pb-1 ml-3">
+                    <a class="blackIcon pl-3 pr-3 tabButtons" href="javascript:void(0);" onclick="switchTabs('productMaster', this);">
+                        Product Master
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12 pt-2 portalPreview" id="productMaster" style="display: none;">
+            <div class="container" style="margin-left: 6rem !important;">
+                <div class="row fullWidthVH p-3 listItem white_BG">
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                        <div>
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h6 class="display-5 gcbc-text">Product Master</h6>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_To">Category<span style="color: red">*</span></label>
+                                            <select id="category" class="form-control">
+                                            </select>
+                                            <div class="help-block" id="categoryError"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_To">Product Name<span style="color: red">*</span></label>
+                                            <input type="text" id="productName" class="form-control" placeholder="Please Enter Product Name">
+                                            <input type="hidden" id="productID">
+                                            <div class="help-block" id="productMasterError"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="submit" onclick="saveProduct(); return false;" value="Save Product" id="btnSubmit_Product" class="btn redIcon_BG mt-4 pt-2 pb-2 pr-4 pl-4" />
+                                            <input type="button" onclick="resetProduct(); return false;" value="Reset" id="btnReset_Product" class="btn blackIcon_BG mt-4 pt-2 pb-2 pr-4 pl-4" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3 fullWidthVH white_BG pb-3">
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 blackFont" style="display: block;">
+                        <span class="largeFont_1x pl-5 ml-4">Product Details</span>
+                    </div>
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" align="center">
+                        <div class="overflow_A ForShadowTiles noBR divTable" id="productTable">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 pt-2 portalPreview" id="categoryMaster">
+            <div class="container" style="margin-left: 6rem !important;">
+                <div class="row fullWidthVH p-3 listItem white_BG">
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                        <div>
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h6 class="display-5 gcbc-text">Category Master</h6>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_To">Category Name<span style="color: red">*</span></label>
+                                            <input type="text" id="categoryName" class="form-control" placeholder="Please Enter Category Name">
+                                            <input type="hidden" id="categoryID">
+                                            <div class="help-block" id="categoryMasterError"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="submit" onclick="saveCategory(); return false;" value="Save Category" id="btnSubmit" class="btn redIcon_BG mt-4 pt-2 pb-2 pr-4 pl-4" />
+                                            <input type="button" onclick="resetCategory(); return false;" value="Reset" id="btnReset" class="btn blackIcon_BG mt-4 pt-2 pb-2 pr-4 pl-4" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3 fullWidthVH white_BG pb-3">
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 blackFont" style="display: block;">
+                        <span class="largeFont_1x pl-5 ml-4">Category Details</span>
+                    </div>
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" align="center">
+                        <div class="overflow_A ForShadowTiles noBR divTable" id="categoryTable">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript" id="pageLoadScript">
+        $(document).ready(function () {
+            bindCategory();
+        });
+
+        function switchTabs(id, element) {
+            $('.portalPreview').each(function () {
+                $(this).css("display", "none");
+            });
+            $('.tabButtons').each(function () {
+                $(this).removeClass("customRed");
+                $(this).removeClass("setBold");
+            });
+            $('.liInline').each(function () {
+                $(this).removeClass("active");
+            });
+            (element.parentElement).classList.add('active');
+            element.classList.add('customRed');
+            element.classList.add('setBold');
+            document.getElementById(id).style.display = "";
+            if (id == 'categoryMaster') {
+                resetCategory();
+            }
+            else {
+                resetProduct();
+            }
+        }
+    </script>
+    <script type="text/javascript" id="categoryScript">
+        function saveCategory() {
+            debugger;
+            var categoryName = $('#categoryName').val();
+            var categoryID = $('#categoryID').val();
+            if (categoryName.trim() != '') {
+                $('#categoryMasterError').removeClass('with-errors');
+                $('#categoryMasterError').removeClass('with-success');
+                $('#categoryMasterError').html('');
+                var params = '';
+                if (categoryID.trim() != '') {
+                    params = '{"categoryID" : "' + categoryID + '","categoryName" : "' + categoryName + '"}';
+                }
+                else {
+                    params = '{"categoryName" : "' + categoryName + '"}';
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: (categoryID.trim() != '' ? '@Url.Action("updateCategory")' : '@Url.Action("createCategory")'),
+                    data: params,
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                        if (response.Message.toString().trim().toLowerCase() == "success") {
+                            $('#categoryName').val('');
+                            $('#categoryMasterError').html('Data ' + (categoryID.trim() != '' ? 'Updated' : 'Saved') + ' Successfully!');
+                            $('#categoryMasterError').removeClass('with-errors');
+                            $('#categoryMasterError').addClass('with-success');
+                        }
+                        else {
+                            console.log(response.Message);
+                            $('#categoryMasterError').html('Error occurred while saving record!');
+                            $('#categoryMasterError').addClass('with-errors');
+                            $('#categoryMasterError').removeClass('with-success');
+                        }
+                        bindCategory();
+                    },
+                    error: function(response) {
+                    }
+                });
+            }
+            else {
+                $('#categoryMasterError').addClass('with-errors');
+                $('#categoryMasterError').removeClass('with-success');
+                $('#categoryMasterError').html('Please Enter Category Name to proceed!');
+            }
+        }
+
+        function bindCategory() {
+            $('#btnSubmit').val('Save Category');
+            $('#categoryID').val('');
+            $('#categoryTable').parent().parent().css('display', '');
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getCategory")',
+                data : '{"id" : ""}',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    if (response.length > 0) {
+                        $('#categoryTable').parent().parent().css('display', '');
+                        var html = '';
+                        html = html + '<table class="table table-bordered m-0">';
+                        html = html + '<tbody>';
+                        html = html + '<tr>';
+                        html = html + '<th class="smallTH">Tools</th>';
+                        html = html + '<th class="smallTH">Sr. No</th>';
+                        html = html + '<th>Category Name</th>';
+                        html = html + '</tr>';
+                        for (var i = 0; i < response.length; i++) {
+                            html = html + '<tr>';
+                            html = html + '<td class="smallTH">';
+                            html = html + '<i class="fa fa-edit pointer" title="Edit" aria-hidden="true" onclick="getCategory(\'' + response[i].encryptedID + '\'); return false;"></i>';
+                            html = html + '<i class="fa fa-trash ml-3 pointer" title="Delete" aria-hidden="true" onclick="deleteCategory(\'' + response[i].encryptedID + '\'); return false;"></i>';
+                            html = html + '</td>';
+                            html = html + '<td class="smallTH">' + (i + 1) + '</td>';
+                            html = html + '<td>' + response[i].categoryName + '</td>';
+                            html = html + '</tr>';
+                        }
+                        html = html + '</tbody>';
+                        html = html + '</table>';
+                        $('#categoryTable').html(html);
+                    }
+                    else {
+                        $('#categoryTable').html('');
+                        $('#categoryTable').parent().parent().css('display', 'none');
+                    }
+                },
+                error: function(response) {
+                }
+             });
+        }
+
+        function getCategory(id) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getCategory")',
+                data : '{"id" : "' + id + '"}',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('#btnSubmit').val('Update Category');
+                    $('#categoryID').val(response[0].encryptedID);
+                    $('#categoryName').val(response[0].categoryName);
+                    $('#categoryTable').parent().parent().css('display', 'none');
+                },
+                error: function(response) {
+                }
+             });
+        }
+
+        function deleteCategory(id) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("deleteCategory")',
+                data : '{"categoryID" : "' + id + '"}',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('#categoryName').val('');
+                    $('#categoryMasterError').html('Data Deleted Successfully!');
+                    $('#categoryMasterError').removeClass('with-errors');
+                    $('#categoryMasterError').addClass('with-success');
+                    bindCategory();
+                },
+                error: function(response) {
+                }
+             });
+        }
+
+        function resetCategory() {
+            $('#categoryMasterError').removeClass('with-errors');
+            $('#categoryMasterError').removeClass('with-success');
+            $('#categoryMasterError').html('');
+            $('#btnSubmit').val('Save Category');
+            $('#categoryID').val('');
+            $('#categoryTable').parent().parent().css('display', '');
+            bindCategory();
+        }
+    </script>
+    <script type="text/javascript" id="productScript">
+        function saveProduct() {
+            var categoryID = $('#category').val();
+            var productName = $('#productName').val();
+            var productID = $('#productID').val();
+            if (categoryID.trim() != '') {
+                $('#categoryError').removeClass('with-errors');
+                $('#categoryError').removeClass('with-success');
+                $('#categoryError').html('');
+                if (productName.trim() != '') {
+                    $('#productMasterError').removeClass('with-errors');
+                    $('#productMasterError').removeClass('with-success');
+                    $('#productMasterError').html('');
+
+                    var params = '';
+                    if (productID.trim() != '') {
+                        params = '{"categoryID" : "' + categoryID + '","productName" : "' + productName + '","productID" : "' + productID + '"}';
+                    }
+                    else {
+                        params = '{"categoryID" : "' + categoryID + '","productName" : "' + productName + '"}';
+                    }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: (productID.trim() != '' ? '@Url.Action("updateProduct")' : '@Url.Action("createProduct")'),
+                        data: params,
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        success: function (response) {
+                            if (response.Message.toString().trim().toLowerCase() == "success") {
+                                $('#productName').val('');
+                                $('#category').val('');
+                                $('#categoryError').html('Data ' + (productID.trim() != '' ? 'Updated' : 'Saved') + ' Successfully!');
+                                $('#categoryError').removeClass('with-errors');
+                                $('#categoryError').addClass('with-success');
+                            }
+                            else {
+                                console.log(response.Message);
+                                $('#categoryError').html('Error occurred while saving record!');
+                                $('#categoryError').addClass('with-errors');
+                                $('#categoryError').removeClass('with-success');
+                            }
+                            bindProduct();
+                        },
+                        error: function(response) {
+                        }
+                    });
+                }
+                else {
+                    $('#productMasterError').addClass('with-errors');
+                    $('#productMasterError').removeClass('with-success');
+                    $('#productMasterError').html('Please Enter Product Name to proceed!');
+                }
+            }
+            else {
+                $('#categoryError').addClass('with-errors');
+                $('#categoryError').removeClass('with-success');
+                $('#categoryError').html('Please Select Category to proceed!');
+            }
+        }
+
+        function bindCategoryDropDown() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getCategory")',
+                data : '{"id" : ""}',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    debugger;
+                    $('#category').html('<option value="">--Select Category--</option>');
+                    for (var i = 0; i < response.length; i++) {
+                        $('#category').append('<option value="' + response[i].encryptedID + '">' + response[i].categoryName + '</option>');
+                    }
+                },
+                error: function(response) {
+                }
+            });
+        }
+
+        function bindProduct() {
+            $('#category').val('');
+            $('#productName').val('');
+            $('#productID').val('');
+            $('#btnSubmit_Product').val('Save Product');
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getProduct")',
+                data: '{"id" : ""}',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    debugger;
+                    console.log(response);
+                    if (response.length > 0) {
+                        $('#productTable').parent().parent().css('display', '');
+                        var html = '';
+                        html = html + '<table class="table table-bordered m-0">';
+                        html = html + '<tbody>';
+                        html = html + '<tr>';
+                        html = html + '<th class="smallTH">Tools</th>';
+                        html = html + '<th class="smallTH">Sr. No</th>';
+                        html = html + '<th>Category Name</th>';
+                        html = html + '<th>Product Name</th>';
+                        html = html + '</tr>';
+                        for (var i = 0; i < response.length; i++) {
+                            html = html + '<tr>';
+                            html = html + '<td class="smallTH">';
+                            html = html + '<i class="fa fa-edit pointer" title="Edit" aria-hidden="true" onclick="getProduct(\'' + response[i].encryptedID + '\'); return false;"></i>';
+                            html = html + '<i class="fa fa-trash ml-3 pointer" title="Delete" aria-hidden="true" onclick="deleteProduct(\'' + response[i].encryptedID + '\'); return false;"></i>';
+                            html = html + '</td>';
+                            html = html + '<td class="smallTH">' + (i + 1) + '</td>';
+                            html = html + '<td>' + response[i].categoryName + '</td>';
+                            html = html + '<td>' + response[i].productName + '</td>';
+                            html = html + '</tr>';
+                        }
+                        html = html + '</tbody>';
+                        html = html + '</table>';
+                        $('#productTable').html(html);
+                    }
+                    else {
+                        $('#productTable').html('');
+                        $('#productTable').parent().parent().css('display', 'none');
+                    }
+                },
+                error: function (response) {
+                    debugger;
+                }
+            });
+        }
+
+        function getProduct(id) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getProduct")',
+                data : '{"id" : "' + id + '"}',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('#btnSubmit_Product').val('Update Product');
+                    $('#productID').val(response[0].encryptedID);
+                    $('#productName').val(response[0].productName);
+                    $('#category').val(response[0].encryptedID_Category);
+                    $('#productTable').parent().parent().css('display', 'none');
+                },
+                error: function(response) {
+                }
+             });
+        }
+
+        function deleteProduct(id) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("deleteProduct")',
+                data : '{"productID" : "' + id + '"}',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('#category').val('');
+                    $('#productName').val('');
+                    $('#categoryError').html('Data Deleted Successfully!');
+                    $('#categoryError').removeClass('with-errors');
+                    $('#categoryError').addClass('with-success');
+                    bindProduct();
+                },
+                error: function(response) {
+                }
+             });
+        }
+
+        function resetProduct() {
+            $('#categoryError').removeClass('with-errors');
+            $('#categoryError').removeClass('with-success');
+            $('#categoryError').html('');
+            $('#productMasterError').removeClass('with-errors');
+            $('#productMasterError').removeClass('with-success');
+            $('#productMasterError').html('');
+            $('#btnSubmit_Product').val('Save Product');
+            $('#category').val('');
+            $('#productID').val('');
+            $('#productName').val('');
+            $('#productTable').parent().parent().css('display', '');
+            bindCategoryDropDown();
+            bindProduct();
+        }
+    </script>
+}

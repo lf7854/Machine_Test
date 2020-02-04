@@ -1,0 +1,50 @@
+create procedure [dbo].[SP_GetProductDetails]
+(
+	@ProductID int
+)
+as
+begin
+	select c.categoryName,c.categoryID,p.productID,p.productName from CategoryMasters c
+	inner join ProductMasters p on c.categoryID = p.categoryID
+	where (isnull(@ProductID,0) = 0 or p.productID = @ProductID)
+end
+GO
+
+create procedure [dbo].[SP_InsertProductDetails]
+(
+	@ProductName varchar(max),
+	@CategoryID int
+)
+as
+begin
+	insert into ProductMasters	(productName,categoryID)
+	values	(@ProductName,@CategoryID)
+end
+GO
+
+create procedure [dbo].[SP_UpdateProductDetails]
+(
+	@CategoryID int,
+	@ProductID int,
+	@ProductName varchar(max)
+)
+as
+begin
+	update ProductMasters
+	set
+	productName = @ProductName,
+	categoryID = @CategoryID
+	where productID = @ProductID
+end
+GO
+
+create procedure [dbo].[SP_DeleteProductDetails]
+(
+	@ProductID int
+)
+as
+begin
+	delete from ProductMasters
+	where productID = @ProductID
+end
+GO
